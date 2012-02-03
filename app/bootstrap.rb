@@ -34,5 +34,7 @@ DataMapper.auto_migrate!
 
 
 get '/' do
-  erb "Hello, world, at #{Time.now}"
+  @page = Page.get(1)
+  erb :page
+  #erb "Hello, world, at #{Time.now}"
 end
