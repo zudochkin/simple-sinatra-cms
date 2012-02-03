@@ -1,0 +1,14 @@
+<h3>Форма страницы</h3>
+<form method="post" action="/update">
+  <label for="id">ID</label>
+  <input id="id" type="text" name="id" value="<%= @page.id %>">
+  <br>
+
+  <label for="name">Name:</label>
+  <input id="name" type="text" name="name" value="<%= @page.name %>">
+  <br>
+
+  <input type="submit" name="submit" value="Сохранить">
+
+
+</form>

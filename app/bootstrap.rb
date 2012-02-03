@@ -31,6 +31,10 @@ DataMapper.auto_migrate!
 
 @page.save
 
+#create
+get '/admin/create' do
+  erb :create_form_
+end
 
 
 get '/' do
