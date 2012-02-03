@@ -14,7 +14,7 @@ class Page
   property :seo_title,        String
   property :seo_keywords,     String
   property :seo_description,  String
-  property :created_at,       Datetime
+  property :created_at,       DateTime
 end
 
 DataMapper.auto_upgrade!
