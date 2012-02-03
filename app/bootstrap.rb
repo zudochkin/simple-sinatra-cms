@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'])
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:./db/page.db')
 
 class Page
   include DataMapper::Resource
@@ -33,7 +33,14 @@ DataMapper.auto_migrate!
 
 #create
 get '/admin/create' do
-  erb :create_form_
+  erb :create_form
+end
+
+post '/admin/create' do
+  @page = Page.create(
+    :name => params[:name]
+  )
+  @page.id
 end
 
 

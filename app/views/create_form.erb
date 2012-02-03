@@ -1,11 +1,7 @@
 <h3>Форма страницы</h3>
-<form method="post" action="/update">
-  <label for="id">ID</label>
-  <input id="id" type="text" name="id" value="<%= @page.id %>">
-  <br>
-
+<form method="post" action="/admin/create">
   <label for="name">Name:</label>
-  <input id="name" type="text" name="name" value="<%= @page.name %>">
+  <input id="name" type="text" name="name" value="">
   <br>
 
   <input type="submit" name="submit" value="Сохранить">
