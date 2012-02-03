@@ -19,6 +19,19 @@ end
 
 DataMapper.auto_migrate!
 
+@page = Page.create(
+  :name => 'name',
+  :short => 'short',
+  :full => 'full',
+  :seo_title => 'seo_title',
+  :seo_keywords => 'seo_keywords',
+  :seo_description => 'seo_description',
+  :created_at => Time.now
+)
+
+@page.save
+
+
 
 get '/' do
   erb "Hello, world, at #{Time.now}"
