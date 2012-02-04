@@ -59,6 +59,11 @@ get '/admin/pages' do
   erb :pages
 end
 
+#deleting
+get '/admin/delete/:id' do
+  Page.get(params[:id]).destroy
+  redirect '/admin/pages'
+end
 get '/' do
   @page = Page.get(1)
   erb :page
