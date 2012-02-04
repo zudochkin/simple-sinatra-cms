@@ -13,7 +13,7 @@
   <br>
 
   <label for="full">Контент:</label>
-  <input id="full" type="text" name="full" value="<%= @page.full %>">
+  <textarea id="full" class="wysiwyg" name="full"><%= @page.full %></textarea>
   <br>
 
   <label for="seo_title">SEO заголовок:</label>
@@ -28,7 +28,7 @@
   <textarea name="seo_description" id="seo_description" rows="2"><%= @page.seo_description %></textarea>
   <br>
 
-  <input type="submit" name="submit" value="Сохранить">
+  <input type="submit" name="submit" value="Сохранить" class="btn btn-primary">
 
 
 </form>

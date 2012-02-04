@@ -1,4 +1,4 @@
-require './app/bootstrap.rb'
+require './bootstrap.rb'
 
 run Sinatra::Application
 

@@ -1,0 +1,27 @@
+<h3>Список страниц</h3>
+<table class="table-striped table">
+  <thead>
+    <tr>
+      <th>Имя</th>
+      <th>Псевдоним</th>
+      <th>Заголовок</th>
+      <th>Создана</th>
+      <th>Изменена</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+	<td><a href="/admin/edit/<%= page.id %>"><%= page.name %></a></td>
+	<td><%= page.alias %></td>
+	<td><%= page.seo_title %></td>
+	<td><%= page.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+	<td><%= page.updated_at.strftime("%d.%m.%Y %H:%M") %></td>
+	<td><a href="/admin/delete/<%= page.id %>" onclick="javascript: return confirm('Вы уверены в этом?')">Удалить</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h5><a href="/admin/create">Создать новую страницу</a></h5>

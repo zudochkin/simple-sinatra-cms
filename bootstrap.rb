@@ -24,6 +24,9 @@ end
 DataMapper.finalize
 #DataMapper.auto_migrate!
 
+#Sinatra configuration
+set :public_directory, './public'
+
 #helpers
 helpers do
   def protected!
@@ -87,16 +90,18 @@ end
 
 get '/' do
   @page = Page.first(:alias => 'mainpage')
+  @pages = Page.all(:alias.not => 'mainpage')
   erb :page
 end
 
 get '/:alias.html' do
   @page = Page.first(:alias => params[:alias])
   not_found 'Страница не найдена' if @page.nil?
-  @page.inspect
+  @pages = Page.all(:alias.not => 'mainpage')
+  erb :page
 end
 
 
 not_found do
-  erb :'404'
+  erb :'404', {:layout => false}
 end
