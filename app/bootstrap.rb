@@ -1,6 +1,10 @@
+# coding: utf-8
+
 require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
+
+NotFoundError = Class.new(StandardError) 
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:./db/page.db')
 
@@ -62,6 +66,7 @@ get '/admin/delete/:id' do
   Page.get(params[:id]).destroy
   redirect '/admin/pages'
 end
+
 get '/' do
   @page = Page.get(1)
   erb :page
@@ -70,9 +75,13 @@ end
 
 get '/:alias.html' do
   @page = Page.first(:alias => params[:alias])
+  raise NotFoundError, 'Страница не найдена' if @page.nil?
   @page.inspect
 end
 
+error NotFoundError do
+end
+
 not_found do
-  erb :404
+  erb :'404'
 end
