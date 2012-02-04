@@ -41,7 +41,7 @@ end
 
 before '/admin/*' do
   protected!
-  @default_layout = 'admin'
+  @default_layout = :admin
 end
 
 #create
