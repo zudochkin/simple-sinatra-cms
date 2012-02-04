@@ -26,6 +26,21 @@ end
 DataMapper.finalize
 #DataMapper.auto_migrate!
 
+#helpers
+helpers do
+  def protected!
+    unless authorized?
+      response['WWW-Authenticate'] = %(Basic realm="Cms's restricted area")
+      throw(:halt, [401, "Not authorized\n"])
+    end
+  end
+
+  def autorized?
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'admin']
+  end
+end
+
 #create
 get '/admin/create' do
   erb :create_form
@@ -68,9 +83,8 @@ get '/admin/delete/:id' do
 end
 
 get '/' do
-  @page = Page.get(1)
+  @page = Page.first(:alias => 'mainpage')
   erb :page
-  #erb "Hello, world, at #{Time.now}"
 end
 
 get '/:alias.html' do
