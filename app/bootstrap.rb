@@ -30,7 +30,6 @@ end
 get '/admin/edit/:id' do
   # fill form
   @page = Page.get(params[:id])
-
   erb :edit_form
 end
 
@@ -40,18 +39,17 @@ post '/admin/edit/:id' do
   params.delete 'id'
   params.delete 'splat'
   params.delete 'captures' 
+  params[:updated_at] = Time.now
   @page.attributes = params
   @page.save
-  #redirect '/admin/pages'
+  redirect '/admin/pages'
 end
 
 post '/admin/create' do
-  # @page = Page.create(
-  #   :name => params[:name]
-  # )
   params.delete 'submit'
+  params[:updated_at] = params[:created_at] = Time.now
   @page = Page.create(params) 
-  @page.id.inspect
+  redirect '/admin/pages'
 end
 
 get '/admin/pages' do
@@ -68,4 +66,13 @@ get '/' do
   @page = Page.get(1)
   erb :page
   #erb "Hello, world, at #{Time.now}"
+end
+
+get '/:alias.html' do
+  @page = Page.first(:alias => params[:alias])
+  @page.inspect
+end
+
+not_found do
+  erb :404
 end
