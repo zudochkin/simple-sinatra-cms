@@ -13,8 +13,8 @@
       <td><a href="/admin/edit/<%= page.id %>"><%= page.name %></a></td>
       <td><%= page.alias %></td>
       <td><%= page.seo_title %></td>
-      <td><%= page.created_at %></td>
-      <td><%= page.updated_at %></td>
+      <td><%= page.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+      <td><%= page.updated_at.strftime("%d.%m.%Y %H:%M") %></td>
       <td><a href="/admin/delete/<%= page.id %>" onclick="javascript: return confirm('Вы уверены в этом?')">Удалить</a></td>
     </tr>
   <% end %>
