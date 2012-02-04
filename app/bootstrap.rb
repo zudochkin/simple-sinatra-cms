@@ -19,19 +19,8 @@ class Page
   property :updated_at,       DateTime
 end
 
-DataMapper.auto_migrate!
-@page = Page.create(
-  :name => 'name',
-  :short => 'short',
-  :full => 'full',
-  :alias => 'mainpage',
-  :seo_title => 'seo_title',
-  :seo_keywords => 'seo_keywords',
-  :seo_description => 'seo_description',
-  :created_at => Time.now
-)
-
-@page.save
+DataMapper.finalize
+#DataMapper.auto_migrate!
 
 #create
 get '/admin/create' do
@@ -46,21 +35,29 @@ get '/admin/edit/:id' do
 end
 
 post '/admin/edit/:id' do
-  params[:id]
+  @page = Page.get(params[:id])
+  params.delete 'submit'
+  params.delete 'id'
+  params.delete 'splat'
+  params.delete 'captures' 
+  @page.attributes = params
+  @page.save
+  #redirect '/admin/pages'
 end
 
 post '/admin/create' do
- # @page = Page.create(
- #   :name => params[:name]
- # )
- params.delete 'submit'
- @page = Page.create(params) 
- @page.id.inspect
+  # @page = Page.create(
+  #   :name => params[:name]
+  # )
+  params.delete 'submit'
+  @page = Page.create(params) 
+  @page.id.inspect
 end
 
 get '/admin/pages' do
   Page.all.inspect
 end
+
 get '/' do
   @page = Page.get(1)
   erb :page

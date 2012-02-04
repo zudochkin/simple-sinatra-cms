@@ -1,9 +1,32 @@
 <h3>Форма страницы</h3>
 <form method="post" action="/admin/edit/<%= @page.id %>">
-  <label for="name">Name:</label>
+  <label for="name">Имя страницы:</label>
   <input id="name" type="text" name="name" value="<%= @page.name %>">
   <br>
 
+  <label for="alias">Псевдоним:</label>
+  <input id="alias" type="text" name="alias" value="<%= @page.alias %>">
+  <br>
+
+  <label for="short">Краткое описание:</label>
+  <input id="short" type="text" name="short" value="<%= @page.short %>">
+  <br>
+
+  <label for="full">Контент:</label>
+  <input id="full" type="text" name="full" value="<%= @page.full %>">
+  <br>
+
+  <label for="seo_title">SEO заголовок:</label>
+  <input id="seo_title" type="text" name="seo_title" value="<%= @page.seo_title %>">
+  <br>
+
+  <label for="seo_keywords">SEO ключевые слова:</label>
+  <input id="seo_keywords" type="text" name="seo_keywords" value="<%= @page.seo_keywords %>">
+  <br>
+
+  <label for="seo_description">SEO описание:</label>
+  <textarea name="seo_description" id="seo_description" rows="2"><%= @page.seo_description %></textarea>
+  <br>
 
   <input type="submit" name="submit" value="Сохранить">
 
