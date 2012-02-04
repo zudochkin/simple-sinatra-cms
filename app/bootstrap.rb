@@ -18,7 +18,6 @@ class Page
 end
 
 DataMapper.auto_migrate!
-
 @page = Page.create(
   :name => 'name',
   :short => 'short',
@@ -36,14 +35,29 @@ get '/admin/create' do
   erb :create_form
 end
 
-post '/admin/create' do
-  @page = Page.create(
-    :name => params[:name]
-  )
-  @page.id
+get '/admin/edit/:id' do
+  # fill form
+  @page = Page.get(params[:id])
+
+  erb :edit_form
 end
 
+post '/admin/edit/:id' do
+  params[:id]
+end
 
+post '/admin/create' do
+ # @page = Page.create(
+ #   :name => params[:name]
+ # )
+ params.delete 'submit'
+ @page = Page.create(params) 
+ @page.id.inspect
+end
+
+get '/admin/pages' do
+  Page.all.inspect
+end
 get '/' do
   @page = Page.get(1)
   erb :page
