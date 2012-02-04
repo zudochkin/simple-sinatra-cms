@@ -9,12 +9,14 @@ class Page
 
   property :id,               Serial
   property :name,             String
+  property :alias,            String
   property :short,            Text
   property :full,             Text
   property :seo_title,        String
   property :seo_keywords,     String
   property :seo_description,  String
   property :created_at,       DateTime
+  property :updated_at,       DateTime
 end
 
 DataMapper.auto_migrate!
@@ -22,6 +24,7 @@ DataMapper.auto_migrate!
   :name => 'name',
   :short => 'short',
   :full => 'full',
+  :alias => 'mainpage',
   :seo_title => 'seo_title',
   :seo_keywords => 'seo_keywords',
   :seo_description => 'seo_description',
