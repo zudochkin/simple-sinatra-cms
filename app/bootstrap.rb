@@ -4,8 +4,6 @@ require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 
-NotFoundError = Class.new(StandardError) 
-
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:./db/page.db')
 
 class Page
@@ -43,11 +41,12 @@ end
 
 before '/admin/*' do
   protected!
+  @default_layout = 'admin'
 end
 
 #create
 get '/admin/create' do
-  erb :create_form
+  erb :create_form 
 end
 
 get '/admin/edit/:id' do
@@ -93,12 +92,10 @@ end
 
 get '/:alias.html' do
   @page = Page.first(:alias => params[:alias])
-  raise NotFoundError, 'Страница не найдена' if @page.nil?
+  not_found 'Страница не найдена' if @page.nil?
   @page.inspect
 end
 
-error NotFoundError do
-end
 
 not_found do
   erb :'404'
