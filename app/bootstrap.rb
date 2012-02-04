@@ -41,6 +41,10 @@ helpers do
   end
 end
 
+before '/admin/*' do
+  protected!
+end
+
 #create
 get '/admin/create' do
   erb :create_form
