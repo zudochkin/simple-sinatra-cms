@@ -14,8 +14,8 @@
       <td><%= page.alias %></td>
       <td><%= page.seo_title %></td>
       <td><%= page.created_at %></td>
-      <td><%= page.modified_at %></td>
-      <td><a href="/admin/delete/<%= page.id %>">Удалить</a></td>
+      <td><%= page.updated_at %></td>
+      <td><a href="/admin/delete/<%= page.id %>" onclick="javascript: return confirm('Вы уверены в этом?')">Удалить</a></td>
     </tr>
   <% end %>
 </table>
