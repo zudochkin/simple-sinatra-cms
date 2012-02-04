@@ -55,7 +55,8 @@ post '/admin/create' do
 end
 
 get '/admin/pages' do
-  Page.all.inspect
+  @pages = Page.all
+  erb :pages
 end
 
 get '/' do

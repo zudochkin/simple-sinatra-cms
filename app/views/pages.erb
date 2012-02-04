@@ -1,0 +1,21 @@
+<h3>Список страниц</h3>
+<table>
+  <tr>
+    <th>Имя</th>
+    <th>Псевдоним</th>
+    <th>Заголовок</th>
+    <th>Создана</th>
+    <th>Изменена</th>
+    <th>&nbsp;</th>
+  </tr>
+  <% @pages.each do |page| %>
+    <tr>
+      <td><a href="/admin/edit/<%= page.id %>"><%= page.name %></a></td>
+      <td><%= page.alias %></td>
+      <td><%= page.seo_title %></td>
+      <td><%= page.created_at %></td>
+      <td><%= page.modified_at %></td>
+      <td><a href="/admin/delete/<%= page.id %>">Удалить</a></td>
+    </tr>
+  <% end %>
+</table>
